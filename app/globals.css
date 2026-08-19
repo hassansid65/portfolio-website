@@ -153,6 +153,53 @@ body::before {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   Mobile performance
+   backdrop-filter is by far the most expensive effect on this page — it forces
+   the compositor to re-blur everything behind ~20 elements on every frame. On a
+   near-black background a flat translucent fill is visually indistinguishable,
+   so mobile trades the blur for the fill and keeps the frame budget.
+   --------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Same reasoning for the scattered backdrop-blur utilities (nav overlay,
+     status pills, badges) — each one is its own compositor pass. They all sit
+     on translucent dark fills that already read correctly without the blur. */
+  .mobile-view [class*="backdrop-blur"] {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Full-viewport fixed layer that repaints against every scrolling element.
+     The mobile sections carry their own gradient glows, so it buys nothing. */
+  body::before {
+    display: none;
+  }
+}
+
+/* Cheap stand-in for `filter: blur()` on large decorative glows. A blur filter
+   on a 300px element costs a full-size GPU pass per frame; a radial gradient is
+   painted once and costs nothing after that. */
+.glow-orb {
+  background: radial-gradient(closest-side, var(--orb-color), transparent 70%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: #0a0a0a; }

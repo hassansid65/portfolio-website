@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export default function About() {
   return (
@@ -9,7 +10,7 @@ export default function About() {
           
           <div className="lg:w-2/5 w-full flex justify-center">
             <div className="relative w-[320px] h-[320px] sm:w-[450px] sm:h-[450px] lg:w-[500px] lg:h-[500px] rounded-3xl overflow-hidden glass-effect glow-cyan p-2">
-              <img src="/profile.jpeg" alt="Hassan Siddiqui" className="w-full h-full object-cover rounded-2xl" />
+              <Image src="/profile.jpeg" alt="Hassan Siddiqui" fill sizes="(max-width: 1023px) 450px, 500px" priority className="object-cover rounded-2xl" />
             </div>
           </div>
           

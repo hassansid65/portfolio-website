@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Send, X, MessageSquare, Trash2, ArrowRight } from "lucide-react"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Send, X, Trash2, ArrowRight } from "lucide-react"
+import Image from "next/image"
 import { SiriOrb } from "@/components/ui/siri-orb"
 
 type ChatMessage = {
@@ -107,10 +107,9 @@ export default function Chatbot() {
             {/* Header */}
             <div className="p-4 border-b border-white/10 flex items-center justify-between bg-gradient-to-r from-[#7B2FF7]/20 to-[#F107A3]/20">
               <div className="flex items-center gap-3">
-                <Avatar className="w-8 h-8 ring-2 ring-[#00E5FF]/50">
-                  <AvatarImage src="/chatbot-avatar.png" alt="Hassan Siddiqui" />
-                  <AvatarFallback className="bg-black text-white text-xs">HS</AvatarFallback>
-                </Avatar>
+                <div className="relative w-8 h-8 shrink-0 rounded-full overflow-hidden ring-2 ring-[#00E5FF]/50">
+                  <Image src="/chatbot-avatar.png" alt="Hassan Siddiqui" fill sizes="32px" className="object-cover" />
+                </div>
                 <div>
                   <h3 className="font-bold text-white text-sm">Hassan's Assistant</h3>
                   <div className="flex items-center gap-1.5">
@@ -231,10 +230,13 @@ export default function Chatbot() {
             
             {/* The Avatar itself */}
             <div className="absolute inset-[3px] rounded-full bg-black z-10 flex items-center justify-center overflow-hidden">
-               <Avatar className="w-full h-full">
-                  <AvatarImage src="/chatbot-avatar.png" alt="Hassan Siddiqui Chatbot" className="object-cover" />
-                  <AvatarFallback className="bg-transparent"><MessageSquare className="text-[#00E5FF] w-12 h-12" /></AvatarFallback>
-               </Avatar>
+               <Image
+                  src="/chatbot-avatar.png"
+                  alt="Hassan Siddiqui Chatbot"
+                  fill
+                  sizes="(max-width: 639px) 76px, 140px"
+                  className="object-cover"
+               />
             </div>
           </motion.button>
         )}

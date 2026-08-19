@@ -38,7 +38,7 @@ export default function Skills() {
                 {category.title}
               </h3>
               
-              <div className="flex flex-wrap gap-2 mt-auto">
+              <div className="flex flex-wrap gap-2">
                 {category.skills.map((skill, skillIdx) => (
                   <span 
                     key={skillIdx} 

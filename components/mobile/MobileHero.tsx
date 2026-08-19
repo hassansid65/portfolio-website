@@ -21,8 +21,14 @@ export default function MobileHero() {
         <MobileSplineRobot className="absolute inset-x-0 top-0 h-[72dvh]" />
 
         {/* Colour wash */}
-        <div className="absolute -top-16 -left-20 w-[300px] h-[300px] rounded-full bg-[#7B2FF7]/25 blur-[90px]" />
-        <div className="absolute top-[45%] -right-24 w-[280px] h-[280px] rounded-full bg-[#F107A3]/20 blur-[90px]" />
+        <div
+          className="glow-orb absolute -top-28 -left-32 w-[440px] h-[440px]"
+          style={{ "--orb-color": "rgba(123,47,247,0.25)" } as React.CSSProperties}
+        />
+        <div
+          className="glow-orb absolute top-[38%] -right-36 w-[420px] h-[420px]"
+          style={{ "--orb-color": "rgba(241,7,163,0.20)" } as React.CSSProperties}
+        />
 
         {/* Scrim: darkens under the navbar, stays clear across the robot, then
             goes solid black exactly where the headline begins. */}

@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 const stats = [
   { label: "Experience", value: "10+ Months" },
@@ -18,10 +19,12 @@ export default function MobileAbout() {
         transition={{ duration: 0.5 }}
       >
         <div className="relative w-full aspect-square max-w-[300px] mx-auto rounded-3xl overflow-hidden glass-effect p-1.5 mb-8">
-          <img
+          <Image
             src="/profile.jpeg"
             alt="Hassan Siddiqui"
-            className="w-full h-full object-cover rounded-[1.25rem]"
+            fill
+            sizes="300px"
+            className="object-cover rounded-[1.25rem]"
           />
         </div>
 

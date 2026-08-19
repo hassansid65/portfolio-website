@@ -18,7 +18,10 @@ export default function MobileTestimonials() {
   return (
     <section id="testimonials" className="relative px-5 py-16 overflow-hidden">
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="w-[320px] h-[320px] rounded-full bg-blue-900/20 blur-3xl" />
+        <div
+          className="glow-orb w-[460px] h-[460px]"
+          style={{ "--orb-color": "rgba(30,58,138,0.22)" } as React.CSSProperties}
+        />
       </div>
 
       <div className="relative z-10">
@@ -49,7 +52,7 @@ export default function MobileTestimonials() {
                 <img
                   src={active.thumbnailSrc}
                   alt={active.name}
-                  className="w-14 h-14 rounded-2xl object-cover border border-white/10"
+                  loading="lazy" decoding="async" className="w-14 h-14 rounded-2xl object-cover border border-white/10"
                 />
                 <div>
                   <p className="text-[11px] font-medium text-[#00E5FF] uppercase tracking-wider">

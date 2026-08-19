@@ -125,7 +125,7 @@ export const TestimonialSlider = ({
                   <img
                     src={review.thumbnailSrc}
                     alt={review.name}
-                    className="w-full h-full object-cover"
+                    loading="lazy" decoding="async" className="w-full h-full object-cover"
                   />
                 </button>
               );

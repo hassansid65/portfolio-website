@@ -1,24 +1,40 @@
-"use client";
-
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 
+/**
+ * Decorative flowing lines behind the hero.
+ *
+ * Two instances render, so every path here costs double. The set was 36 paths
+ * each — 72 infinite animations that kept running long after the hero scrolled
+ * away. It now draws half as many lines over the same spread (geometry steps by
+ * two instead of one, so the shape is unchanged, just less dense) and freezes
+ * them entirely once the hero is out of view.
+ */
 export function FloatingPaths({ position }: { position: number }) {
-    const paths = Array.from({ length: 36 }, (_, i) => ({
-        id: i,
-        d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-            380 - i * 5 * position
-        } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-            152 - i * 5 * position
-        } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-            684 - i * 5 * position
-        } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-        color: `rgba(15,23,42,${0.1 + i * 0.03})`,
-        width: 0.5 + i * 0.03,
-    }));
+    const ref = useRef<HTMLDivElement>(null);
+    const inView = useInView(ref);
+
+    const paths = Array.from({ length: 18 }, (_, i) => {
+        const k = i * 2;
+        return {
+            id: i,
+            d: `M-${380 - k * 5 * position} -${189 + k * 6}C-${
+                380 - k * 5 * position
+            } -${189 + k * 6} -${312 - k * 5 * position} ${216 - k * 6} ${
+                152 - k * 5 * position
+            } ${343 - k * 6}C${616 - k * 5 * position} ${470 - k * 6} ${
+                684 - k * 5 * position
+            } ${875 - k * 6} ${684 - k * 5 * position} ${875 - k * 6}`,
+            width: 0.5 + k * 0.03,
+            opacity: (0.1 + k * 0.03) / 2,
+            // Deterministic, so a re-render does not reshuffle every duration.
+            duration: 20 + (i % 10),
+        };
+    });
 
     return (
-        <div className="absolute inset-0 pointer-events-none">
+        <div ref={ref} className="absolute inset-0 pointer-events-none">
             <svg
                 className="w-full h-full text-slate-950 dark:text-white"
                 viewBox="0 0 696 316"
@@ -31,18 +47,26 @@ export function FloatingPaths({ position }: { position: number }) {
                         d={path.d}
                         stroke="currentColor"
                         strokeWidth={path.width}
-                        strokeOpacity={(0.1 + path.id * 0.03) / 2}
+                        strokeOpacity={path.opacity}
                         initial={{ pathLength: 0.3, opacity: 0.3 }}
-                        animate={{
-                            pathLength: 1,
-                            opacity: [0.15, 0.3, 0.15],
-                            pathOffset: [0, 1, 0],
-                        }}
-                        transition={{
-                            duration: 20 + Math.random() * 10,
-                            repeat: Number.POSITIVE_INFINITY,
-                            ease: "linear",
-                        }}
+                        animate={
+                            inView
+                                ? {
+                                      pathLength: 1,
+                                      opacity: [0.15, 0.3, 0.15],
+                                      pathOffset: [0, 1, 0],
+                                  }
+                                : { pathLength: 1, opacity: 0.2 }
+                        }
+                        transition={
+                            inView
+                                ? {
+                                      duration: path.duration,
+                                      repeat: Number.POSITIVE_INFINITY,
+                                      ease: "linear",
+                                  }
+                                : { duration: 0 }
+                        }
                     />
                 ))}
             </svg>

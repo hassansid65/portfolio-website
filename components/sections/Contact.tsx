@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { RainbowButton } from "@/components/ui/rainbow-borders-button"
 
 export default function Contact() {
@@ -13,11 +14,13 @@ export default function Contact() {
             <p className="text-neutral-400 text-lg mb-8 leading-relaxed max-w-md">
               Interested in AI systems, LLM infrastructure, or voice AI solutions? Feel free to reach out.
             </p>
-            <div className="mb-10 w-[80%] h-64 rounded-3xl overflow-hidden glass-effect">
-              <img
+            <div className="relative mb-10 w-[80%] h-64 rounded-3xl overflow-hidden glass-effect">
+              <Image
                 src="/astronaut-guitar.png"
                 alt="Astronaut playing guitar"
-                className="w-full h-full object-cover opacity-80 mix-blend-screen"
+                fill
+                sizes="(max-width: 1023px) 90vw, 40vw"
+                className="object-cover opacity-80 mix-blend-screen"
               />
             </div>
           </div>

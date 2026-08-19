@@ -24,7 +24,10 @@ export default function MobileSplineRobot({ className = "" }: { className?: stri
     <div className={`relative overflow-hidden ${className}`}>
       {/* Spotlight behind the robot */}
       <div className="absolute inset-0 flex items-start justify-center pointer-events-none">
-        <div className="mt-[12%] w-[85%] aspect-square rounded-full bg-[#7B2FF7]/30 blur-[80px]" />
+        <div
+          className="glow-orb mt-[6%] w-[120%] aspect-square"
+          style={{ "--orb-color": "rgba(123,47,247,0.30)" } as React.CSSProperties}
+        />
       </div>
 
       <motion.div

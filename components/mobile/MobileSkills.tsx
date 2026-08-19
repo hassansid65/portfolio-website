@@ -15,7 +15,10 @@ export default function MobileSkills() {
   return (
     <section id="skills" className="relative px-5 py-16 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[320px] h-[320px] bg-red-700/15 blur-[80px] rounded-full" />
+        <div
+          className="glow-orb absolute top-[18%] left-1/2 -translate-x-1/2 w-[460px] h-[460px]"
+          style={{ "--orb-color": "rgba(185,28,28,0.16)" } as React.CSSProperties}
+        />
       </div>
 
       <div className="relative z-10">
