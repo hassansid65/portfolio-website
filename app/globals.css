@@ -180,6 +180,10 @@ body::before {
   body::before {
     display: none;
   }
+
+  body {
+    background: #0a0a0c;
+  }
 }
 
 /* Cheap stand-in for `filter: blur()` on large decorative glows. A blur filter
@@ -198,6 +202,122 @@ body::before {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Mobile hero visual (MobileHeroVisual)
+   Only transform and opacity are animated, so these run entirely on the
+   compositor — no layout, no paint, no main-thread work per frame.
+   --------------------------------------------------------------------------- */
+.hv-stack {
+  width: 19rem;
+  height: 19rem;
+}
+
+.hv-ring,
+.hv-orbit {
+  will-change: transform;
+}
+
+.hv-spin-slow {
+  animation: hv-spin 26s linear infinite;
+}
+.hv-spin-rev {
+  animation: hv-spin 19s linear infinite reverse;
+}
+.hv-spin-mid {
+  animation: hv-spin 34s linear infinite;
+}
+
+.hv-node {
+  box-shadow: 0 0 12px currentColor;
+}
+
+.hv-core {
+  animation: hv-breathe 6s ease-in-out infinite;
+  box-shadow: 0 0 60px rgba(123, 47, 247, 0.55);
+}
+
+@keyframes hv-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hv-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Mobile redesign tokens
+   --------------------------------------------------------------------------- */
+
+/* Scroll reveal (see lib/use-scroll-reveal.ts). Elements are visible by default
+   so the server HTML reads correctly; the hook adds .reveal-armed on mount and
+   .is-revealed as each one enters the viewport. */
+.reveal-armed {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal-armed.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Headline accent used across the mobile screens */
+.dc-gradient-text {
+  background: linear-gradient(120deg, #F107A3, #7B2FF7 52%, #00E5FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@keyframes dc-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.dc-pulse {
+  animation: dc-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes dc-float-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.dc-float-in {
+  animation: dc-float-in 0.6s ease both;
+}
+
+/* Fine film grain over the whole mobile screen — a single static painted layer */
+.dc-grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Scrollbar */

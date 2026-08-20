@@ -1,5 +1,5 @@
 "use client"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { skillCategories } from "@/lib/site-data"
 
 export default function Skills() {
@@ -11,7 +11,7 @@ export default function Skills() {
       </div>
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
-        <motion.div
+        <m.div
            initial={{ opacity: 0, y: 20 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
@@ -22,11 +22,11 @@ export default function Skills() {
           <p className="text-neutral-400 tracking-wide text-lg max-w-2xl mx-auto">
             A comprehensive overview of my technical stack and specialized capabilities.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, idx) => (
-            <motion.div
+            <m.div
               key={idx}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -48,7 +48,7 @@ export default function Skills() {
                   </span>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

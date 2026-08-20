@@ -1,5 +1,5 @@
 "use client"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { experience, education } from "@/lib/site-data"
 
 export default function Education() {
@@ -13,7 +13,7 @@ export default function Education() {
           
           <div className="border-l-2 border-white/10 pl-8 relative space-y-12">
             {experience.map((exp, idx) => (
-              <motion.div 
+              <m.div 
                 key={idx}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -26,7 +26,7 @@ export default function Education() {
                 <p className="text-[#F107A3] font-medium mb-1">{exp.company}</p>
                 <span className="text-xs tracking-widest uppercase text-neutral-500 block mb-4">{exp.date}</span>
                 <p className="text-neutral-400 leading-relaxed text-sm">{exp.desc}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>
@@ -37,7 +37,7 @@ export default function Education() {
           
           <div className="border-l-2 border-white/10 pl-8 relative space-y-12">
             {education.map((edu, idx) => (
-              <motion.div 
+              <m.div 
                 key={idx}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -49,7 +49,7 @@ export default function Education() {
                 <h3 className="text-xl font-bold text-white mb-1">{edu.degree}</h3>
                 <p className="text-[#00E5FF] font-medium mb-1">{edu.school}</p>
                 <span className="text-xs tracking-widest uppercase text-neutral-500 block mb-4">{edu.date}</span>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </div>

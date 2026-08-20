@@ -1,5 +1,5 @@
 "use client"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { ExternalLink, Github, CalendarDays } from "lucide-react"
 import { projects } from "@/lib/site-data"
@@ -20,7 +20,7 @@ export default function Projects() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Featured: full-width, media beside the copy so the row stays compact */}
           {featured.map((project) => (
-            <motion.div
+            <m.div
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -64,11 +64,11 @@ export default function Projects() {
                   </div>
                 </div>
               </Card>
-            </motion.div>
+            </m.div>
           ))}
 
           {rest.map((project, idx) => (
-            <motion.div
+            <m.div
               key={project.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export default function Projects() {
                   </button>
                 </CardFooter>
               </Card>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

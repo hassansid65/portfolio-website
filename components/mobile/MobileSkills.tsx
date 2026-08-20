@@ -1,88 +1,77 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
-import { skillCategories } from "@/lib/site-data"
+import { mobileSkillCategories } from "@/lib/site-data"
 
 /**
- * Nine skill categories as flat cards would be an endless scroll on a phone, so
- * they collapse into an accordion with the first one open.
+ * Nine categories as flat cards would be an endless scroll on a phone, so they
+ * collapse into an accordion with the first one open. Only one is open at a
+ * time, which keeps the section a predictable length.
  */
 export default function MobileSkills() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
+  const [openIndex, setOpenIndex] = useState<number>(0)
 
   return (
-    <section id="skills" className="relative px-5 py-16 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="glow-orb absolute top-[18%] left-1/2 -translate-x-1/2 w-[460px] h-[460px]"
-          style={{ "--orb-color": "rgba(185,28,28,0.16)" } as React.CSSProperties}
-        />
-      </div>
+    <section id="skills" className="relative py-14 px-[22px] overflow-hidden">
+      <div
+        aria-hidden
+        className="absolute top-[60px] left-1/2 -translate-x-1/2 w-[360px] h-[360px] rounded-full z-0 pointer-events-none"
+        style={{ background: "radial-gradient(closest-side,rgba(229,62,62,.14),transparent 70%)" }}
+      />
 
-      <div className="relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
-          <h2 className="text-3xl font-bold mb-2 text-[#e53e3e]">My Skills &amp; Expertise</h2>
-          <p className="text-neutral-400 text-sm leading-relaxed">
-            A comprehensive overview of my technical stack and specialized capabilities.
-          </p>
-        </motion.div>
+      <div className="relative z-[1]">
+        <p data-reveal className="text-[11px] tracking-[.18em] uppercase text-[#F107A3] mb-2">
+          Toolbox
+        </p>
+        <h2 data-reveal className="text-[28px] font-bold leading-[1.05] text-white mb-2">
+          Skills &amp; Expertise
+        </h2>
+        <p data-reveal className="text-sm text-[#8a8a90] leading-[1.5] mb-[22px]">
+          A comprehensive overview of my technical stack and specialized capabilities.
+        </p>
 
-        <div className="space-y-3">
-          {skillCategories.map((category, idx) => {
+        <div className="flex flex-col gap-2.5">
+          {mobileSkillCategories.map((category, idx) => {
             const isOpen = openIndex === idx
             return (
               <div
                 key={category.title}
-                className={`glass-effect rounded-2xl border overflow-hidden transition-colors ${
-                  isOpen ? "border-red-500/40" : "border-white/10"
-                }`}
+                data-reveal
+                className="bg-white/[.04] rounded-[18px] overflow-hidden border transition-colors"
+                style={{ borderColor: isOpen ? "rgba(241,7,163,.4)" : "rgba(255,255,255,.08)" }}
               >
                 <button
-                  onClick={() => setOpenIndex(isOpen ? null : idx)}
+                  onClick={() => setOpenIndex(isOpen ? -1 : idx)}
                   aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between gap-3 px-4 py-4 text-left"
+                  className="w-full flex items-center justify-between gap-3 p-4 bg-transparent border-none cursor-pointer text-left"
                 >
-                  <span className="text-[15px] font-bold text-white leading-snug">
+                  <span className="text-[15px] font-semibold text-white leading-[1.3]">
                     {category.title}
                   </span>
                   <ChevronDown
                     size={18}
-                    className={`shrink-0 text-neutral-400 transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-red-400" : ""
-                    }`}
+                    strokeWidth={2.4}
+                    className="shrink-0 transition-transform duration-300"
+                    style={{
+                      transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      color: isOpen ? "#F107A3" : "rgba(255,255,255,.5)"
+                    }}
                   />
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: "easeInOut" }}
-                      className="overflow-hidden"
-                    >
-                      <div className="flex flex-wrap gap-2 px-4 pb-4">
-                        {category.skills.map((skill) => (
-                          <span
-                            key={skill}
-                            className="px-3 py-1.5 bg-neutral-900/60 border border-neutral-700/50 rounded-lg text-[12px] text-neutral-300"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {isOpen && (
+                  <div className="flex flex-wrap gap-2 px-4 pb-4">
+                    {category.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-3 py-[7px] bg-white/[.05] border border-white/[.08] rounded-[10px] text-xs text-[#c7c7cc]"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
             )
           })}

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -136,7 +136,7 @@ export const TestimonialSlider = ({
         {/* === Center Column: Main Image === */}
         <div className="md:col-span-4 relative h-80 min-h-[400px] md:min-h-[500px] order-1 md:order-2">
           <AnimatePresence initial={false} custom={direction}>
-            <motion.img
+            <m.img
               key={currentIndex}
               src={activeReview.imageSrc}
               alt={activeReview.name}
@@ -156,7 +156,7 @@ export const TestimonialSlider = ({
           {/* Text Content */}
           <div className="relative overflow-hidden pt-4 md:pt-24 min-h-[200px]">
             <AnimatePresence initial={false} custom={direction} mode="wait">
-              <motion.div
+              <m.div
                 key={currentIndex}
                 custom={direction}
                 variants={textVariants}
@@ -174,7 +174,7 @@ export const TestimonialSlider = ({
                 <blockquote className="mt-6 text-2xl md:text-3xl font-medium leading-snug text-neutral-200">
                   "{activeReview.quote}"
                 </blockquote>
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
 

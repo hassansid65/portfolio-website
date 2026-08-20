@@ -9,6 +9,8 @@ export type Project = {
   status: string
   /** Delivery date, or a range while the work is ongoing */
   date: string
+  /** Compact status for the mobile card badge, where space is tight */
+  statusShort?: string
   image: string
   /** Render the image as a brand wallpaper (contained + tinted) instead of a screenshot crop */
   brandWallpaper?: boolean
@@ -25,6 +27,7 @@ export const projects: Project[] = [
       "Transforming finance with AI. Pipelines that ingest, reconcile, and transform financial data into automated accounting and reporting workflows — replacing repetitive manual data entry and reconciliation for international clients and cutting manual processing time significantly.",
     tech: "AI Automation | Data Pipelines | Reconciliation | Reporting",
     status: "Live · Client Engagement",
+    statusShort: "Live · Client",
     date: "June 2026 – Present",
     image: "/plainflow.png",
     brandWallpaper: true,
@@ -206,6 +209,97 @@ export const skillCategories = [
     ]
   }
 ]
+
+export const mobileSkillCategories = [
+  {
+    title: "🧠 Core Programming",
+    skills: ["Python", "OOP", "REST API (FastAPI / Flask)", "SQL", "Git & GitHub"]
+  },
+  {
+    title: "🤖 AI / Machine Learning",
+    skills: [
+      "ML (Supervised & Unsupervised)",
+      "Deep Learning (CNNs, RNNs, Transformers)",
+      "Model Training & Evaluation"
+    ]
+  },
+  {
+    title: "🧬 GenAI / LLM",
+    skills: [
+      "OpenAI / GPT",
+      "Anthropic / Claude",
+      "Prompt Engineering",
+      "RAG",
+      "Embeddings & Vector DBs",
+      "Agentic Workflows",
+      "MCP / Function Calling",
+      "Multi-modal AI"
+    ]
+  },
+  {
+    title: "⚙️ Frameworks & Libraries",
+    skills: [
+      "LangChain",
+      "LangGraph",
+      "Hugging Face",
+      "TensorFlow / PyTorch",
+      "Scikit-learn",
+      "NumPy, Pandas, Matplotlib",
+      "OpenCV"
+    ]
+  },
+  {
+    title: "☁️ Deployment & Backend",
+    skills: ["FastAPI", "Docker", "Azure AI Foundry", "OpenAI / HF Inference", "CI/CD"]
+  },
+  {
+    title: "🗄️ Data & Databases",
+    skills: [
+      "PostgreSQL",
+      "MySQL",
+      "Redis",
+      "Vector Databases",
+      "Data Cleaning & Preprocessing"
+    ]
+  },
+  {
+    title: "💹 Finance Automation",
+    skills: [
+      "Financial Data Ingestion",
+      "Reconciliation Workflows",
+      "Automated Accounting & Reporting",
+      "Client Process Mapping",
+      "Power BI"
+    ]
+  },
+  {
+    title: "📊 Specialized",
+    skills: [
+      "NLP (NER, Classification)",
+      "Computer Vision",
+      "Speech AI (TTS, STT)",
+      "OCR Systems",
+      "Recommendation Systems"
+    ]
+  },
+  {
+    title: "🚀 Real-World Systems",
+    skills: [
+      "AI Chatbots (RAG)",
+      "End-to-end ML pipelines",
+      "AI automation systems",
+      "Latency optimization"
+    ]
+  }
+]
+
+/** Bottom tab bar destinations, in order. */
+export const mobileTabs = [
+  { id: "home", label: "Home" },
+  { id: "projects", label: "Work" },
+  { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contact" }
+] as const
 
 export const reviews = [
   {

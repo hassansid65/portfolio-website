@@ -1,5 +1,5 @@
 "use client"
-import { motion, useScroll, useMotionValueEvent } from "framer-motion"
+import { m, useScroll, useMotionValueEvent } from "framer-motion"
 import { useState } from "react"
 import { navLinks } from "@/lib/site-data"
 
@@ -17,7 +17,7 @@ export default function Navbar() {
   })
 
   return (
-    <motion.nav
+    <m.nav
       variants={{
         visible: { y: 0 },
         hidden: { y: "-100%" }
@@ -43,6 +43,6 @@ export default function Navbar() {
           Stop Music
         </button>
       </div>
-    </motion.nav>
+    </m.nav>
   )
 }

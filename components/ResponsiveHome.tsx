@@ -1,5 +1,7 @@
 "use client"
 
+import { LazyMotion, domAnimation } from "framer-motion"
+
 import { useViewport } from "@/lib/use-viewport"
 
 import Navbar from "@/components/layout/Navbar"
@@ -27,7 +29,7 @@ export default function ResponsiveHome() {
   const pending = viewport === "unknown"
 
   return (
-    <>
+    <LazyMotion features={domAnimation} strict>
       {viewport !== "mobile" && (
         <div className={pending ? "hidden md:block" : undefined}>
           <Navbar />
@@ -49,6 +51,6 @@ export default function ResponsiveHome() {
       )}
 
       <Chatbot />
-    </>
+    </LazyMotion>
   )
 }

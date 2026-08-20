@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { Send, X, Trash2, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { SiriOrb } from "@/components/ui/siri-orb"
@@ -93,11 +93,11 @@ export default function Chatbot() {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-[104px] right-4 sm:bottom-6 sm:right-6 z-40 sm:z-50 flex flex-col items-end">
       
       <AnimatePresence>
         {isOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.9 }}
@@ -209,14 +209,14 @@ export default function Chatbot() {
               </form>
             </div>
             
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
 
       {/* Toggle Button */}
       <AnimatePresence>
         {!isOpen && (
-          <motion.button
+          <m.button
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
@@ -238,7 +238,7 @@ export default function Chatbot() {
                   className="object-cover"
                />
             </div>
-          </motion.button>
+          </m.button>
         )}
       </AnimatePresence>
     </div>

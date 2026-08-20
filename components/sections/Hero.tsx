@@ -1,7 +1,7 @@
 "use client"
 import { SplineScene } from "@/components/ui/splite"
 import { Spotlight } from "@/components/ui/spotlight"
-import { motion } from "framer-motion"
+import { m } from "framer-motion"
 import { Github, Linkedin, Download } from "lucide-react"
 import { FloatingPaths } from "@/components/ui/background-paths"
 import { RainbowButton } from "@/components/ui/rainbow-borders-button"
@@ -23,7 +23,7 @@ export default function Hero() {
         
         {/* Left content */}
         <div className="flex-1 relative z-10 flex flex-col justify-center text-left">
-          <motion.div 
+          <m.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -52,7 +52,7 @@ export default function Hero() {
                 <Github size={22} />
               </a>
             </div>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Right content */}
@@ -70,7 +70,7 @@ export default function Hero() {
       
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
         <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
-          <motion.div
+          <m.div
             animate={{ y: [0, 12, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
             className="w-1.5 h-1.5 bg-[#00E5FF] rounded-full glow-cyan"
